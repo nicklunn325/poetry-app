@@ -2,13 +2,19 @@ class UsersController < ApplicationController
 
     def create
         user = User.create!(user_params)
-        # byebug;
+        # new User 
         session[:user_id] = user.id
+        # byebug
         render json: { user: user }, status: :created
     end
 
     def show
         # check for session id and log user in if they have one
+        if session[:user_id]
+            user = User.find(session[:user_id])
+            render json: { user: user }, status: :ok
+        end
+        
     end
 
     private

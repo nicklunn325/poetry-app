@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import Errors from './Errors'
-const Signup = ({setCurrentUser, setErrors, errors}) => {
+const Signup = ({ handleUserLoginAndSignup, errors}) => {
 
     const [state, setState] = useState({})
 
@@ -21,15 +21,11 @@ const Signup = ({setCurrentUser, setErrors, errors}) => {
             body: JSON.stringify(state)
         }
 
-        // fetch('/users', config)   // need to set up proxy
-        fetch('http://localhost:3000/users', config)
+        // fetch('http://localhost:3000/users', config)
+        fetch('/users', config)   // need to set up proxy
         .then(res => res.json())
-        .then(data => handleCreateUser(data))
+        .then(data => handleUserLoginAndSignup(data))
         // .catch(error => console.log(error, 'error'))
-    }
-
-    const handleCreateUser = (data) => {
-        data.errors ? setErrors(data.errors) : setCurrentUser(data.user) //&& setErrors([])
     }
 
     return (
