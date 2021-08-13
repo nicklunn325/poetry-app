@@ -25,6 +25,7 @@ const App = () => {
     data.errors ? setErrors(data.errors) : setCurrentUser(data.user)
     if(!data.errors){
       history.push('/')
+      setErrors([])
     }
   }
 
