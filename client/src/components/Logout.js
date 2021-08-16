@@ -12,6 +12,16 @@ const Logout = ({setCurrentUser}) => {
         setCurrentUser(null)
         history.push('/login')
     })
+    // useEffect(logout)
+    // async function logout(){
+    //     let config = {
+    //         method: 'DELETE'
+    //     }
+
+    //     await fetch('/logout', config)
+    //     setCurrentUser(null)
+    //     history.push('/login')
+    // }
     return(
         <h1>bananas</h1>
     )

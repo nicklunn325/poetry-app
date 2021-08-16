@@ -4,7 +4,7 @@ import Login from './components/Login'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Logout from './components/Logout'
-// import Bananas from './components/Bananas'
+import NewPoemForm from './components/NewPoemForm'
 import {useState, useEffect} from 'react'
 import {Switch, Route, useHistory} from 'react-router-dom'
 
@@ -13,13 +13,8 @@ const App = () => {
   const history = useHistory()
   const [currentUser, setCurrentUser] = useState(null);
   const [errors, setErrors] = useState([]);
-  
-  // const handleCreateUser = (data) => {
-  //   data.errors ? setErrors(data.errors) : setCurrentUser(data.user)
-  //   if(!data.errors){
-  //     history.push('/')
-  //   }
-  // }
+  const [categories, setCategories] = useState([]);
+  const [poems, setPoems] = useState([])
 
   const handleUserLoginAndSignup = (data) => {
     data.errors ? setErrors(data.errors) : setCurrentUser(data.user)
@@ -29,17 +24,37 @@ const App = () => {
     }
   }
 
+  const handleNewPoem = (data) => {
+    // debugger;
+    data.errors ? setErrors(data.errors) : setPoems([...poems, data.poem])
+    if(!data.errors){
+      history.push('/')
+      setErrors([])
+    }
+  }
+
+  const stateInitializer = () => {
+    fetchCategories()
+    checkSessionId()
+  }
+
+  const fetchCategories = () => {
+    fetch('/categories')
+    .then(res => res.json())
+    .then(data => setCategories(data.categories))
+  }
+
+  const fetchPoems = () => {
+    // fetch poems
+  }
+
   const checkSessionId = () => {
-  // function checkSessionId(){
     fetch('/me')
     .then(res => res.json())
     .then(data => setCurrentUser(data.user))
   }
     
-  useEffect(checkSessionId, []);
-  // useEffect( () => {
-  //   fetch('/me')
-  // }, )
+  useEffect(stateInitializer, []);
 
   return (
     <div className="App">
@@ -49,9 +64,9 @@ const App = () => {
         <Route exact path='/'>
           <Home/>
         </Route>
-        {/* <Route path='/bananas'>
-          <Bananas/>
-        </Route> */}
+        <Route path='/poems/new'>
+          <NewPoemForm handleNewPoem={handleNewPoem} categories={categories} errors={errors}/>
+        </Route>
         <Route path='/signup'>
           <Signup errors={errors} handleUserLoginAndSignup={handleUserLoginAndSignup} />  
         </Route>
