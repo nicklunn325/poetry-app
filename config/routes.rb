@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:create]
-  resources :poems, only: [:create]
+  resources :poems, only: [:create, :index]
   resources :categories, only: [:index]
 
   get '/me', to: 'users#show'

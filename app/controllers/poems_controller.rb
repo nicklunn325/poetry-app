@@ -1,6 +1,11 @@
 class PoemsController < ApplicationController
     skip_before_action :authorize, only: [:index]
 
+    def index
+        poems = Poem.all 
+        render json: { poems: poems }, status: :ok 
+    end
+
     def create
         # byebug
         poem = @current_user.poems.build(poem_params)

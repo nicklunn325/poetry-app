@@ -36,16 +36,19 @@ const App = () => {
   const stateInitializer = () => {
     fetchCategories()
     checkSessionId()
+    fetchPoems() // should we do this? is it necessary?
+  }
+
+  const fetchPoems = () => {
+    fetch('/poems')
+    .then(res => res.json())
+    .then(data => setPoems(data.poems))
   }
 
   const fetchCategories = () => {
     fetch('/categories')
     .then(res => res.json())
     .then(data => setCategories(data.categories))
-  }
-
-  const fetchPoems = () => {
-    // fetch poems
   }
 
   const checkSessionId = () => {
@@ -62,7 +65,7 @@ const App = () => {
       { currentUser ? `${currentUser.username} is currently logged in.` : null}
       <Switch>
         <Route exact path='/'>
-          <Home/>
+          <Home poems={poems}/>
         </Route>
         <Route path='/poems/new'>
           <NewPoemForm handleNewPoem={handleNewPoem} categories={categories} errors={errors}/>
