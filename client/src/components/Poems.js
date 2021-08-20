@@ -8,7 +8,7 @@ const Poems = ({ poems }) => {
     
     return (
         <div>
-            { renderPoems() }
+            {/* { renderPoems() } */}
         </div>
     )
 }

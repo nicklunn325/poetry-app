@@ -3,7 +3,9 @@ class PoemsController < ApplicationController
 
     def index
         poems = Poem.all 
-        render json: { poems: poems }, status: :ok 
+        options = { include: [:user, :category] }
+        json = PoemSerializer.new(poems, options).serializable_hash.to_json
+        render json: json, status: :ok 
     end
 
     def create

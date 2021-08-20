@@ -13,7 +13,10 @@ class UsersController < ApplicationController
         # check for session id and log user in if they have one
         if session[:user_id]
             user = User.find(session[:user_id])
-            render json: { user: user }, status: :ok
+            # options = { include: [:poems]}
+            user_json = UserSerializer.new(user).serializable_hash
+            poem_json = PoemSerializer.new(user.poems).serializable_hash
+            render json: {user: user_json, poems: poem_json}, status: :ok
         end
         
     end
