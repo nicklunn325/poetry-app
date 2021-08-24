@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
-    before_action :authorize
+    # before_action :authorize
 
     private
 
