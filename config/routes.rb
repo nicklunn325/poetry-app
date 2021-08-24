@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root "fallback#index"
+  
   namespace :api do
     resources :users, only: [:create]
     resources :poems, only: [:create, :index]
