@@ -40,19 +40,19 @@ const App = () => {
   }
 
   const fetchPoems = () => {
-    fetch('/api/poems')
+    fetch('/poems')
     .then(res => res.json())
     .then(data => setPoems(data.poems))
   }
 
   const fetchCategories = () => {
-    fetch('/api/categories')
+    fetch('/categories')
     .then(res => res.json())
     .then(data => setCategories(data.categories))
   }
 
   const checkSessionId = () => {
-    fetch('/api/me')
+    fetch('/me')
     .then(res => res.json())
     .then(data => setCurrentUser(data.user))
   }

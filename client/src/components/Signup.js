@@ -22,7 +22,7 @@ const Signup = ({ handleUserLoginAndSignup, errors}) => {
         }
 
         // fetch('http://localhost:3000/users', config)
-        fetch('/api/users', config)   // need to set up proxy
+        fetch('/users', config)   // need to set up proxy
         .then(res => res.json())
         .then(data => handleUserLoginAndSignup(data))
         // .catch(error => console.log(error, 'error'))

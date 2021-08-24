@@ -20,7 +20,7 @@ const Login = ({errors, handleUserLoginAndSignup}) => {
         body: JSON.stringify(state)
       }
 
-      fetch('/api/login', config)
+      fetch('/login', config)
       .then(res => res.json())
       .then(data => handleUserLoginAndSignup(data))
     }

@@ -23,7 +23,7 @@ const NewPoemForm = ({ handleNewPoem, categories, errors}) => {
         }
 
         // fetch('http://localhost:3000/users', config)
-        fetch('/api/poems', config)   // need to set up proxy
+        fetch('/poems', config)   // need to set up proxy
         .then(res => res.json())
         .then(data => handleNewPoem(data))
         // .catch(error => console.log(error, 'error'))
